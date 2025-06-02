@@ -71,6 +71,22 @@
             transform: translateY(-2px);
         }
 
+        .mobile-menu {
+            display: none;
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
         .hero-danger {
             padding: 140px 0 80px;
             text-align: center;
@@ -310,17 +326,6 @@
             animation: fadeInUp 0.8s ease 0.3s forwards;
         }
 
-        .mobile-menu {
-            display: none;
-            background: white;
-            color: #333;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 5px;
-        }
-
         footer {
             background: #2c3e50;
             color: white;
@@ -492,24 +497,122 @@
             }
         }
 
-            @media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: rgba(0, 128, 128, 0.95);
-        padding: 1rem;
-    }
+        /* MOBILE STYLES */
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
 
-    .nav-links.mobile-open {
-        display: flex;
-    }
-}
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0, 128, 128, 0.98);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                border-radius: 0 0 15px 15px;
+                gap: 0;
+            }
 
+            .nav-links.mobile-open {
+                display: flex;
+            }
 
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                margin: 0.5rem 0;
+            }
+
+            .nav-links a {
+                display: block;
+                width: 100%;
+                padding: 1rem;
+                border-radius: 10px;
+                margin: 0;
+            }
+
+            .hero-danger h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-danger p {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+
+            .danger-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin-top: 2rem;
+            }
+
+            .danger-card {
+                padding: 1.5rem;
+            }
+
+            .emergency-steps {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .safe-list {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero-danger {
+                padding: 120px 0 60px;
+            }
+
+            .hero-danger h1 {
+                font-size: 2rem;
+            }
+
+            .danger-content {
+                padding: 3rem 0;
+            }
+
+            .danger-card {
+                padding: 1rem;
+            }
+
+            .card-icon {
+                font-size: 2.5rem;
+            }
+
+            .danger-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .emergency-section {
+                padding: 3rem 0;
+            }
+
+            .emergency-section h2 {
+                font-size: 2rem;
+            }
+
+            .emergency-step {
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -533,10 +636,9 @@
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="breeds.html">Top Breeds</a></li>
-                  <li><a href="foods-to-avoid.html" class="active">Foods to Avoid</a></li>
+                <li><a href="foods-to-avoid.html" class="active">Foods to Avoid</a></li>
                 <li><a href="nutrition.html">Nutrition</a></li>
                 <li><a href="care.html">Cat Care</a></li>
-                
             </ul>
             <button class="mobile-menu">☰</button>
         </nav>
@@ -751,368 +853,3 @@
                         <h3>☎ Emergency Contacts</h3>
                         <p><strong>PAWS Animal Welfare Society:</strong> (+60)17 284 7500</p>
                         <p><strong>Malaysian National Animal Welfare Foundation:</strong> (+60)19 211 2150</p>
-                        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">*These hotlines may charge a consultation fee but provide 24/7 expert guidance</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Purrfect Cat Guide. Made with 💜 for cat lovers everywhere.</p>
-        </div>
-    </footer>
-
-    <div class="floating-cat" onclick="scrollToTop()">🐾</div>
-
-    <script>
-        function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    // Add scroll effect to header
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(0, 128, 128, 0.95)';
-        } else {
-            header.style.background = 'rgba(0, 128, 128, 0.9)';
-        }
-    });
-
-    // Mobile menu functionality
-    document.querySelector('.mobile-menu').addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('mobile-open');
-    });
-        function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    // Add scroll effect to header
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(0, 128, 128, 0.95)';
-        } else {
-            header.style.background = 'rgba(0, 128, 128, 0.9)';
-        }
-    });
-
-    // Mobile menu functionality
-    document.querySelector('.mobile-menu').addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('mobile-open');
-    });
-        function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    // Add scroll effect to header
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(0, 128, 128, 0.95)';
-        } else {
-            header.style.background = 'rgba(0, 128, 128, 0.9)';
-        }
-    });
-
-    // Mobile menu functionality
-    document.querySelector('.mobile-menu').addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('mobile-open');
-    });
-        function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    // Add scroll effect to header
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(0, 128, 128, 0.95)';
-        } else {
-            header.style.background = 'rgba(0, 128, 128, 0.9)';
-        }
-    });
-
-    // Mobile menu functionality
-    document.querySelector('.mobile-menu').addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('mobile-open');
-    });
-        function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    // Add scroll effect to header
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(0, 128, 128, 0.95)';
-        } else {
-            header.style.background = 'rgba(0, 128, 128, 0.9)';
-        }
-    });
-
-    // Mobile menu functionality
-    document.querySelector('.mobile-menu').addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('mobile-open');
-    });
-        function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    // Add scroll effect to header
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(0, 128, 128, 0.95)';
-        } else {
-            header.style.background = 'rgba(0, 128, 128, 0.9)';
-        }
-    });
-
-    // Mobile menu functionality
-    document.querySelector('.mobile-menu').addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('mobile-open');
-    });
-
-        function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    // Add scroll effect to header
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(0, 128, 128, 0.95)';
-        } else {
-            header.style.background = 'rgba(0, 128, 128, 0.9)';
-        }
-    });
-
-    // Mobile menu functionality
-    document.querySelector('.mobile-menu').addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('mobile-open');
-    });
-        function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    // Add scroll effect to header
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(0, 128, 128, 0.95)';
-        } else {
-            header.style.background = 'rgba(0, 128, 128, 0.9)';
-        }
-    });
-
-    // Mobile menu functionality
-    document.querySelector('.mobile-menu').addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('mobile-open');
-    });
-        function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    // Add scroll effect to header
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(0, 128, 128, 0.95)';
-        } else {
-            header.style.background = 'rgba(0, 128, 128, 0.9)';
-        }
-    });
-
-    // Mobile menu functionality
-    document.querySelector('.mobile-menu').addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('mobile-open');
-    });
-        function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    // Add scroll effect to header
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(0, 128, 128, 0.95)';
-        } else {
-            header.style.background = 'rgba(0, 128, 128, 0.9)';
-        }
-    });
-
-    // Mobile menu functionality
-    document.querySelector('.mobile-menu').addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('mobile-open');
-    });
-        function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    // Add scroll effect to header
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(0, 128, 128, 0.95)';
-        } else {
-            header.style.background = 'rgba(0, 128, 128, 0.9)';
-        }
-    });
-
-    // Mobile menu functionality
-    document.querySelector('.mobile-menu').addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('mobile-open');
-    });
-        function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    // Add scroll effect to header
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(0, 128, 128, 0.95)';
-        } else {
-            header.style.background = 'rgba(0, 128, 128, 0.9)';
-        }
-    });
-
-    // Mobile menu functionality
-    document.querySelector('.mobile-menu').addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('mobile-open');
-    });
-        function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    // Add scroll effect to header
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(0, 128, 128, 0.95)';
-        } else {
-            header.style.background = 'rgba(0, 128, 128, 0.9)';
-        }
-    });
-
-    // Mobile menu functionality
-    document.querySelector('.mobile-menu').addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('mobile-open');
-    });
-        function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    // Add scroll effect to header
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(0, 128, 128, 0.95)';
-        } else {
-            header.style.background = 'rgba(0, 128, 128, 0.9)';
-        }
-    });
-
-    // Mobile menu functionality
-    document.querySelector('.mobile-menu').addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('mobile-open');
-    });
-        function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    // Add scroll effect to header
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(0, 128, 128, 0.95)';
-        } else {
-            header.style.background = 'rgba(0, 128, 128, 0.9)';
-        }
-    });
-
-    // Mobile menu functionality
-    document.querySelector('.mobile-menu').addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('mobile-open');
-    });
-
-       // Mobile menu functionality
-       document.querySelector('.mobile-menu').addEventListener('click', function() {
-           const navLinks = document.querySelector('.nav-links');
-           if (navLinks.style.display === 'flex') {
-               navLinks.style.display = 'none';
-           } else {
-               navLinks.style.display = 'flex';
-               navLinks.style.flexDirection = 'column';
-               navLinks.style.position = 'absolute';
-               navLinks.style.top = '100%';
-               navLinks.style.left = '0';
-               navLinks.style.right = '0';
-               navLinks.style.background = 'rgba(0, 128, 128, 0.95)';
-               navLinks.style.padding = '1rem';
-           }
-       });
-
