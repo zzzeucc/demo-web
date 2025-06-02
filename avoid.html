@@ -492,22 +492,28 @@
             }
         }
 
-            @media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: rgba(0, 128, 128, 0.95);
-        padding: 1rem;
-    }
-
-    .nav-links.mobile-open {
-        display: flex;
-    }
-}
+             @media (max-width: 768px) {
+     .nav-links {
+         display: none;
+     }
+     
+     .mobile-menu {
+         display: block;
+     }
+     
+     .hero h1 {
+         font-size: 2.5rem;
+     }
+     
+     .hero p {
+         font-size: 1.1rem;
+     }
+     
+     .features-grid {
+         grid-template-columns: 1fr;
+         gap: 1rem;
+     }
+ }
 
 
     </style>
@@ -766,50 +772,44 @@
 
     <div class="floating-cat" onclick="scrollToTop()">🐾</div>
 
-    <script>
-        function scrollToTop() {
+   <div class="floating-cat" onclick="scrollToTop()">🐾</div>
+<script>
+    function comingSoon(sectionName) {
+        alert(`Coming soon: ${sectionName} section!`);
+    }
+    function scrollToTop() {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
     }
-
     // Add scroll effect to header
     window.addEventListener('scroll', function() {
         const header = document.querySelector('header');
         if (window.scrollY > 100) {
             header.style.background = 'rgba(0, 128, 128, 0.95)';
+            header.style.color = 'white';
         } else {
             header.style.background = 'rgba(0, 128, 128, 0.9)';
+            header.style.color = 'white';
         }
     });
-
     // Mobile menu functionality
     document.querySelector('.mobile-menu').addEventListener('click', function() {
         const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('mobile-open');
+        if (navLinks.style.display === 'flex') {
+            navLinks.style.display = 'none';
+        } else {
+            navLinks.style.display = 'flex';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.background = 'rgba(0, 128, 128, 0.95)';
+            navLinks.style.padding = '1rem';
+        }
     });
-        function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-       // Mobile menu functionality
-       document.querySelector('.mobile-menu').addEventListener('click', function() {
-           const navLinks = document.querySelector('.nav-links');
-           if (navLinks.style.display === 'flex') {
-               navLinks.style.display = 'none';
-           } else {
-               navLinks.style.display = 'flex';
-               navLinks.style.flexDirection = 'column';
-               navLinks.style.position = 'absolute';
-               navLinks.style.top = '100%';
-               navLinks.style.left = '0';
-               navLinks.style.right = '0';
-               navLinks.style.background = 'rgba(0, 128, 128, 0.95)';
-               navLinks.style.padding = '1rem';
-           }
-       });
-
+</script>
+</body>
+</html>
