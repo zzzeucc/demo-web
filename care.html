@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Care - Purrfect Cat Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #F0E3E0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(0, 128, 128, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 128, 128, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .page-header {
+            padding-top: 120px;
+            padding-bottom: 60px;
+            text-align: center;
+            color: #333;
+            position: relative;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease 0.3s both;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .care-section {
+            background: white;
+            margin: 2rem 0;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 128, 128, 0.1);
+            animation: slideInUp 0.8s ease forwards;
+        }
+
+        .care-header {
+            background: linear-gradient(135deg, #008080, #006666);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .care-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .care-header .icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .care-content {
+            padding: 3rem;
+        }
+
+        .care-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .care-steps.two-columns {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .step-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid #008080;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 128, 128, 0.2);
+            background: #fff;
+        }
+
+        .step-number {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #008080;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .step-card h3 {
+            color: #008080;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            padding-right: 40px;
+        }
+
+        .step-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, #e8f6f6, #d1f2f2);
+            border: 2px solid #008080;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .tip-box::before {
+            content: "💡";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: #008080;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .tip-box h4 {
+            color: #008080;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff5f5, #fed7d7);
+            border: 2px solid #e53e3e;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .warning-box::before {
+            content: "⚠️";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: #e53e3e;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .warning-box h4 {
+            color: #e53e3e;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .supply-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .supply-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 128, 128, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .supply-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 128, 128, 0.2);
+        }
+
+        .supply-item .emoji {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .supply-item h5 {
+            color: #008080;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: white;
+            color: #333;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+
+        .floating-cat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 3rem;
+            z-index: 1000;
+            animation: float 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        /* PAW PRINT ANIMATIONS */
+        .paw-prints {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .paw-print {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(0, 128, 128, 0.1);
+            animation: pawFloat 15s linear infinite;
+            opacity: 0;
+        }
+
+        .paw-print:nth-child(odd) {
+            color: rgba(0, 128, 128, 0.08);
+            font-size: 1.2rem;
+        }
+
+        .paw-print:nth-child(2) { animation-delay: -2s; left: 10%; }
+        .paw-print:nth-child(3) { animation-delay: -4s; left: 20%; font-size: 1.8rem; }
+        .paw-print:nth-child(4) { animation-delay: -6s; left: 30%; }
+        .paw-print:nth-child(5) { animation-delay: -8s; left: 40%; font-size: 1.3rem; }
+        .paw-print:nth-child(6) { animation-delay: -10s; left: 50%; }
+        .paw-print:nth-child(7) { animation-delay: -12s; left: 60%; font-size: 1.6rem; }
+        .paw-print:nth-child(8) { animation-delay: -14s; left: 70%; }
+        .paw-print:nth-child(9) { animation-delay: -16s; left: 80%; font-size: 1.4rem; }
+        .paw-print:nth-child(10) { animation-delay: -18s; left: 90%; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pawFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .page-header p {
+                font-size: 1.1rem;
+            }
+            
+            .care-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .care-steps.two-columns {
+                grid-template-columns: 1fr;
+            }
+            
+            .supply-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Paw Print Background Animation -->
+    <div class="paw-prints">
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+    </div>
+
+    <header>
+        <nav class="container">
+            <div class="logo">🐱 Purrfect Guide</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="breeds.html">Top Breeds</a></li>
+                <li><a href="avoid.html">Foods to Avoid</a></li>
+                <li><a href="nutrition.html">Nutrition</a></li>
+                <li><a href="care.html" class="active">Cat Care</a></li>
+            </ul>
+            <button class="mobile-menu">☰</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Complete Cat Care Guide</h1>
+                <p>Master the art of keeping your feline friend healthy, happy, and well-groomed with our comprehensive care instructions and expert tips.</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- Grooming Section -->
+            <section class="care-section">
+                <div class="care-header">
+                    <span class="icon">🚿</span>
+                    <h2>Grooming Essentials</h2>
+                    <p>Keep your cat looking and feeling their best</p>
+                </div>
+                <div class="care-content">
+                    <div class="care-steps">
+                        <div class="step-card">
+                            <div class="step-number">1</div>
+                            <h3>Brushing</h3>
+                            <p>Brush your cat daily if long-haired, 2-3 times weekly for short-haired cats. Use a slicker brush for tangles and a bristle brush for finishing. Always brush in the direction of hair growth.</p>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-number">2</div>
+                            <h3>Nail Trimming</h3>
+                            <p>Trim nails every 2-3 weeks using cat nail clippers. Only cut the white tip, avoiding the pink quick. Hold paw gently and press pad to extend claws.</p>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-number">3</div>
+                            <h3>Ear Cleaning</h3>
+                            <p>Check ears weekly for dirt, wax, or odor. Clean with cotton ball and cat ear cleaner. Never use cotton swabs deep in the ear canal.</p>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-number">4</div>
+                            <h3>Dental Care</h3>
+                            <p>Brush teeth 2-3 times weekly with cat toothpaste and soft brush. Start slowly to get your cat accustomed to the process.</p>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-number">5</div>
+                            <h3>Eye Care</h3>
+                            <p>Wipe away discharge with damp, clean cloth. Use separate cloth for each eye. Contact vet if discharge is colored or excessive.</p>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-number">6</div>
+                            <h3>Bathing (When Needed)</h3>
+                            <p>Most cats don't need baths unless very dirty or have skin conditions. Use lukewarm water and cat-specific shampoo. Rinse thoroughly.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        <h4>Pro Grooming Tips</h4>
+                        <p>Start grooming routines when your cat is young to get them used to handling. Always reward with treats and praise. If your cat is resistant, try short sessions and gradually increase duration. For matted fur, use a dematting comb or consider professional grooming.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Health Care Section -->
+            <section class="care-section">
+                <div class="care-header">
+                    <span class="icon">🏥</span>
+                    <h2>Health & Wellness</h2>
+                    <p>Essential health care for your feline companion</p>
+                </div>
+                <div class="care-content">
+                    <div class="care-steps two-columns">
+                        <div class="step-card">
+                            <div class="step-number">1</div>
+                            <h3>Regular Vet Checkups</h3>
+                            <p>Schedule annual wellness exams for adult cats, bi-annual for seniors (7+). Kittens need multiple visits in their first year for vaccinations and spaying/neutering.</p>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-number">2</div>
+                            <h3>Vaccinations</h3>
+                            <p>Keep up with core vaccines (rabies, FVRCP) and discuss lifestyle-based vaccines with your vet. Maintain vaccination records and follow recommended schedules.</p>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-number">3</div>
+                            <h3>Parasite Prevention</h3>
+                            <p>Use monthly flea/tick prevention and regular deworming as recommended by your vet. Check for signs of parasites during grooming sessions.</p>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-number">4</div>
+                            <h3>Weight Management</h3>
+                            <p>Monitor your cat's weight regularly. Overweight cats are prone to diabetes, arthritis, and other health issues. Adjust food portions and increase play time as needed.</p>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4>Emergency Signs - Contact Your Vet Immediately</h4>
+                        <p>Difficulty breathing, not eating for 24+ hours, vomiting repeatedly, difficulty urinating, lethargy, hiding, sudden behavior changes, seizures, or any signs of pain or distress.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Daily Care Section -->
+            <section class="care-section">
+                <div class="care-header">
+                    <span class="icon">🏠</span>
+                    <h2>Daily Care Routine</h2>
+                    <p>Creating a healthy daily environment</p>
+                </div>
+                <div class="care-content">
+                    <div class="care-steps two-columns">
+                        <div class="step-card">
+                            <div class="step-number">1</div>
+                            <h3>Litter Box Maintenance</h3>
+                            <p>Scoop daily, completely change litter weekly. Provide one box per cat plus one extra. Keep boxes clean and in quiet, accessible locations.</p>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-number">2</div>
+                            <h3>Fresh Water & Food</h3>
+                            <p>Provide fresh water daily in clean bowls. Feed measured portions of high-quality cat food at consistent times. Wash food and water bowls regularly.</p>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-number">3</div>
+                            <h3>Exercise & Play</h3>
+                            <p>Engage in 10-15 minutes of active play twice daily. Use toys that mimic hunting behavior like feather wands, laser pointers, and interactive toys.</p>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-number">4</div>
+                            <h3>Environmental Enrichment</h3>
+                            <p>Provide scratching posts, climbing trees, window perches, and hiding spots. Rotate toys weekly to maintain interest and prevent boredom.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Essential Supplies Section -->
+            <section class="care-section">
+                <div class="care-header">
+                    <span class="icon">🛍️</span>
+                    <h2>Essential Care Supplies</h2>
+                    <p>Everything you need for proper cat care</p>
+                </div>
+                <div class="care-content">
+                    <div class="supply-list">
+                        <div class="supply-item">
+                            <span class="emoji">💇🏼</span>
+                            <h5>Slicker Brush</h5>
+                            <p>For removing loose fur and tangles</p>
+                        </div>
+
+                        <div class="supply-item">
+                            <span class="emoji">✂️</span>
+                            <h5>Nail Clippers</h5>
+                            <p>Cat-specific guillotine or scissor type</p>
+                        </div>
+
+                        <div class="supply-item">
+                            <span class="emoji">🦷</span>
+                            <h5>Cat Toothbrush</h5>
+                            <p>Soft bristles and cat toothpaste</p>
+                        </div>
+
+                        <div class="supply-item">
+                            <span class="emoji">🧽</span>
+                            <h5>Ear Cleaner</h5>
+                            <p>Veterinarian-approved solution</p>
+                        </div>
+
+                        <div class="supply-item">
+                            <span class="emoji">🧴</span>
+                            <h5>Cat Shampoo</h5>
+                            <p>Gentle, cat-specific formula</p>
+                        </div>
+
+                        <div class="supply-item">
+                            <span class="emoji">🏥</span>
+                            <h5>First Aid Kit</h5>
+                            <p>Basic medical supplies</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        <h4>Building Your Care Kit</h4>
+                        <p>Start with basic essentials and add items as needed. Quality tools last longer and work better. Keep a grooming schedule and stick to it. Remember that patience and positive reinforcement make care routines easier for both you and your cat.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Purrfect Cat Guide. Made with 💜 for cat lovers everywhere.</p>
+        </div>
+    </footer>
+
+    <div class="floating-cat" onclick="scrollToTop()">🐾</div>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 128, 128, 0.95)';
+            } else {
+                header.style.background = 'rgba(0, 128, 128, 0.9)';
+            }
+        });
+
+        // Mobile menu functionality
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'rgba(0, 128, 128, 0.95)';
+                navLinks.style.padding = '1rem';
+            }
+        });
+
+        // Animate sections on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.care-section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

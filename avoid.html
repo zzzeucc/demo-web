@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foods to Avoid - Purrfect Cat Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #F0E3E0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(0, 128, 128, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 128, 128, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .hero-danger {
+            padding: 140px 0 80px;
+            text-align: center;
+            color: #333;
+            position: relative;
+            background: linear-gradient(135deg, #FFE5E5 0%, #FFD6D6 100%);
+        }
+
+        .hero-danger h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease;
+            color: #c53030;
+        }
+
+        .hero-danger p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .danger-content {
+            background: white;
+            padding: 5rem 0;
+        }
+
+        .danger-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .danger-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(197, 48, 48, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: popIn 0.8s ease forwards;
+            border-left: 5px solid #e53e3e;
+        }
+
+        .danger-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(197, 48, 48, 0.2);
+            border-color: rgba(197, 48, 48, 0.3);
+        }
+
+        .danger-card:nth-child(2) { animation-delay: 0.1s; }
+        .danger-card:nth-child(3) { animation-delay: 0.2s; }
+        .danger-card:nth-child(4) { animation-delay: 0.3s; }
+        .danger-card:nth-child(5) { animation-delay: 0.4s; }
+        .danger-card:nth-child(6) { animation-delay: 0.5s; }
+        .danger-card:nth-child(7) { animation-delay: 0.6s; }
+        .danger-card:nth-child(8) { animation-delay: 0.7s; }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .danger-card h3 {
+            font-size: 1.8rem;
+            color: #c53030;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .danger-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .danger-level {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .danger-level.high {
+            background: #fed7d7;
+            color: #c53030;
+        }
+
+        .danger-level.extreme {
+            background: #c53030;
+            color: white;
+        }
+
+        .danger-level.moderate {
+            background: #fef5e7;
+            color: #c05621;
+        }
+
+        .symptoms-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1rem;
+        }
+
+        .symptoms-list li {
+            padding: 0.3rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .symptoms-list li:before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+
+        .emergency-section {
+            background: linear-gradient(135deg, #c53030 0%, #9b2c2c 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .emergency-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .emergency-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .emergency-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .emergency-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .emergency-step {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .emergency-step:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .step-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fed7d7;
+            margin-bottom: 1rem;
+        }
+
+        .safe-alternatives {
+            background: #f0fff4;
+            border: 2px solid #68d391;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .safe-alternatives h3 {
+            color: #38a169;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .safe-list {
+            list-style: none;
+            padding-left: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .safe-list li {
+            padding: 0.5rem 0;
+            color: #38a169;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .safe-list li:before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease 0.1s forwards;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: white;
+            color: #333;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .floating-cat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 3rem;
+            z-index: 1000;
+            animation: float 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        /* PAW PRINT ANIMATIONS */
+        .paw-prints {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .paw-print {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(197, 48, 48, 0.1);
+            animation: pawFloat 15s linear infinite;
+            opacity: 0;
+        }
+
+        .paw-print:nth-child(odd) {
+            color: rgba(197, 48, 48, 0.08);
+            font-size: 1.2rem;
+        }
+
+        .paw-print:nth-child(2) { animation-delay: -2s; left: 10%; }
+        .paw-print:nth-child(3) { animation-delay: -4s; left: 20%; font-size: 1.8rem; }
+        .paw-print:nth-child(4) { animation-delay: -6s; left: 30%; }
+        .paw-print:nth-child(5) { animation-delay: -8s; left: 40%; font-size: 1.3rem; }
+        .paw-print:nth-child(6) { animation-delay: -10s; left: 50%; }
+        .paw-print:nth-child(7) { animation-delay: -12s; left: 60%; font-size: 1.6rem; }
+        .paw-print:nth-child(8) { animation-delay: -14s; left: 70%; }
+        .paw-print:nth-child(9) { animation-delay: -16s; left: 80%; font-size: 1.4rem; }
+        .paw-print:nth-child(10) { animation-delay: -18s; left: 90%; }
+
+        .hero-paws {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .hero-paw {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(197, 48, 48, 0.15);
+            animation: heroPawBounce 8s ease-in-out infinite;
+        }
+
+        .hero-paw:nth-child(1) {
+            top: 20%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .hero-paw:nth-child(2) {
+            top: 60%;
+            right: 20%;
+            animation-delay: 2s;
+        }
+
+        .hero-paw:nth-child(3) {
+            bottom: 30%;
+            left: 25%;
+            animation-delay: 4s;
+        }
+
+        .hero-paw:nth-child(4) {
+            top: 40%;
+            right: 15%;
+            animation-delay: 6s;
+        }
+
+        .card-paw-trail {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.2rem;
+            color: rgba(197, 48, 48, 0.2);
+            animation: trailPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.8);
+            }
+            50% {
+                transform: translateY(-10px) scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pawFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes heroPawBounce {
+            0%, 100% {
+                transform: translateY(0px) scale(1);
+                opacity: 0.15;
+            }
+            50% {
+                transform: translateY(-20px) scale(1.1);
+                opacity: 0.25;
+            }
+        }
+
+        @keyframes trailPulse {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(1.1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero-danger h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-danger p {
+                font-size: 1.1rem;
+            }
+            
+            .danger-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .emergency-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .safe-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Paw Print Background Animation -->
+    <div class="paw-prints">
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+    </div>
+
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🐱 Purrfect Guide</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="breeds.html">Top Breeds</a></li>
+                  <li><a href="foods-to-avoid.html" class="active">Foods to Avoid</a></li>
+                <li><a href="nutrition.html">Nutrition</a></li>
+                <li><a href="care.html">Cat Care</a></li>
+                
+            </ul>
+            <button class="mobile-menu">☰</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-danger">
+            <!-- Hero Section Paw Animations -->
+            <div class="hero-paws">
+                <div class="hero-paw">🐾</div>
+                <div class="hero-paw">🐾</div>
+                <div class="hero-paw">🐾</div>
+                <div class="hero-paw">🐾</div>
+            </div>
+            <div class="container">
+                <h1>⚠️ Foods to Avoid</h1>
+                <p>Critical safety information about toxic and dangerous foods that can harm your cat. Keep your feline friend safe by avoiding these potentially life-threatening items.</p>
+            </div>
+        </section>
+
+        <section class="danger-content">
+            <div class="container">
+                <h2 class="section-title">Dangerous Foods for Cats</h2>
+                <p class="section-subtitle">These foods can cause serious health problems or even be fatal to cats</p>
+                
+                <div class="danger-grid">
+                    <div class="danger-card">
+                        <div class="card-paw-trail">🐾</div>
+                        <div class="card-icon">🍫</div>
+                        <h3>⚠️ Chocolate & Caffeine</h3>
+                        <div class="danger-level extreme">EXTREMELY TOXIC</div>
+                        <p>Contains theobromine and caffeine, which cats cannot metabolize. Even small amounts can be fatal.</p>
+                        <ul class="symptoms-list">
+                            <li>Vomiting and diarrhea</li>
+                            <li>Rapid heartbeat</li>
+                            <li>Seizures</li>
+                            <li>Tremors and hyperactivity</li>
+                            <li>Difficulty breathing</li>
+                        </ul>
+                    </div>
+
+                    <div class="danger-card">
+                        <div class="card-paw-trail">🐾</div>
+                        <div class="card-icon">🧄</div>
+                        <h3>⚠️ Onions, Garlic & Chives</h3>
+                        <div class="danger-level high">HIGHLY TOXIC</div>
+                        <p>All forms (raw, cooked, powdered) damage red blood cells and can cause anemia.</p>
+                        <ul class="symptoms-list">
+                            <li>Weakness and lethargy</li>
+                            <li>Pale gums</li>
+                            <li>Vomiting</li>
+                            <li>Breathlessness</li>
+                            <li>Orange to dark red urine</li>
+                        </ul>
+                    </div>
+
+                    <div class="danger-card">
+                        <div class="card-paw-trail">🐾</div>
+                        <div class="card-icon">🍇</div>
+                        <h3>⚠️ Grapes & Raisins</h3>
+                        <div class="danger-level extreme">EXTREMELY TOXIC</div>
+                        <p>Even small amounts can cause kidney failure. The toxic compound is unknown, making all grapes dangerous.</p>
+                        <ul class="symptoms-list">
+                            <li>Vomiting within hours</li>
+                            <li>Loss of appetite</li>
+                            <li>Kidney failure</li>
+                            <li>Decreased urination</li>
+                            <li>Abdominal pain</li>
+                        </ul>
+                    </div>
+
+                    <div class="danger-card">
+                        <div class="card-paw-trail">🐾</div>
+                        <div class="card-icon">🍺</div>
+                        <h3>⚠️ Alcohol</h3>
+                        <div class="danger-level extreme">EXTREMELY TOXIC</div>
+                        <p>Cats are extremely sensitive to alcohol. Even small amounts can cause severe poisoning.</p>
+                        <ul class="symptoms-list">
+                            <li>Vomiting and diarrhea</li>
+                            <li>Loss of coordination</li>
+                            <li>Difficulty breathing</li>
+                            <li>Coma</li>
+                            <li>Death</li>
+                        </ul>
+                    </div>
+
+                    <div class="danger-card">
+                        <div class="card-paw-trail">🐾</div>
+                        <div class="card-icon">🥚</div>
+                        <h3>⚠️ Raw Eggs & Fish</h3>
+                        <div class="danger-level moderate">MODERATELY DANGEROUS</div>
+                        <p>Raw eggs contain avidin which prevents biotin absorption. Raw fish can contain harmful bacteria.</p>
+                        <ul class="symptoms-list">
+                            <li>Salmonella poisoning</li>
+                            <li>Biotin deficiency</li>
+                            <li>Skin problems</li>
+                            <li>Coat issues</li>
+                            <li>Digestive upset</li>
+                        </ul>
+                    </div>
+
+                    <div class="danger-card">
+                        <div class="card-paw-trail">🐾</div>
+                        <div class="card-icon">🍞</div>
+                        <h3>⚠️ Raw Dough</h3>
+                        <div class="danger-level high">HIGHLY DANGEROUS</div>
+                        <p>Yeast ferments in the stomach, producing alcohol and causing bloating that can be life-threatening.</p>
+                        <ul class="symptoms-list">
+                            <li>Bloating and gas</li>
+                            <li>Abdominal pain</li>
+                            <li>Alcohol poisoning</li>
+                            <li>Difficulty breathing</li>
+                            <li>Loss of coordination</li>
+                        </ul>
+                    </div>
+
+                    <div class="danger-card">
+                        <div class="card-paw-trail">🐾</div>
+                        <div class="card-icon">🍯</div>
+                        <h3>⚠️ Xylitol (Artificial Sweetener)</h3>
+                        <div class="danger-level extreme">EXTREMELY TOXIC</div>
+                        <p>Found in sugar-free gum, candy, and baked goods. Causes rapid insulin release and liver damage.</p>
+                        <ul class="symptoms-list">
+                            <li>Rapid drop in blood sugar</li>
+                            <li>Loss of coordination</li>
+                            <li>Vomiting</li>
+                            <li>Liver failure</li>
+                            <li>Collapse and coma</li>
+                        </ul>
+                    </div>
+
+                    <div class="danger-card">
+                        <div class="card-paw-trail">🐾</div>
+                        <div class="card-icon">🌸</div>
+                        <h3>⚠️ Lilies (Plants)</h3>
+                        <div class="danger-level extreme">EXTREMELY TOXIC</div>
+                        <p>All parts of lily plants are deadly to cats. Even pollen can cause fatal kidney failure.</p>
+                        <ul class="symptoms-list">
+                            <li>Vomiting within 2 hours</li>
+                            <li>Loss of appetite</li>
+                            <li>Kidney failure</li>
+                            <li>Decreased urination</li>
+                            <li>Death within 3-7 days</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="safe-alternatives">
+                    <h3>✅ Safe Alternatives & Treats</h3>
+                    <p>Instead of dangerous foods, offer your cat these safe and healthy options:</p>
+                    <ul class="safe-list">
+                        <li>Cooked chicken (boneless)</li>
+                        <li>Cooked fish (boneless)</li>
+                        <li>Small pieces of cooked turkey</li>
+                        <li>Cat-specific treats</li>
+                        <li>Catnip and cat grass</li>
+                        <li>Freeze-dried meat treats</li>
+                        <li>Cooked plain rice (small amounts)</li>
+                        <li>Cooked carrots (small pieces)</li>
+                        <li>Commercial cat treats</li>
+                        <li>Boneless cooked salmon</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="emergency-section">
+            <div class="container">
+                <div class="emergency-content">
+                    <h2>🚨 Emergency Response</h2>
+                    <p>If your cat has consumed any toxic food, follow these immediate steps:</p>
+                    
+                    <div class="emergency-steps">
+                        <div class="emergency-step">
+                            <div class="step-number">1</div>
+                            <h4>Stay Calm</h4>
+                            <p>Don't panic. Quick, calm action is most effective for your cat's safety.</p>
+                        </div>
+
+                        <div class="emergency-step">
+                            <div class="step-number">2</div>
+                            <h4>Remove Access</h4>
+                            <p>Immediately remove any remaining toxic food from your cat's reach.</p>
+                        </div>
+
+                        <div class="emergency-step">
+                            <div class="step-number">3</div>
+                            <h4>Contact Vet</h4>
+                            <p>Call your veterinarian or emergency animal hospital immediately.</p>
+                        </div>
+
+                        <div class="emergency-step">
+                            <div class="step-number">4</div>
+                            <h4>Gather Info</h4>
+                            <p>Note what was eaten, how much, and when. This helps the vet determine treatment.</p>
+                        </div>
+
+                        <div class="emergency-step">
+                            <div class="step-number">5</div>
+                            <h4>Follow Guidance</h4>
+                            <p>Follow your vet's instructions exactly. Don't induce vomiting unless told to do so.</p>
+                        </div>
+
+                        <div class="emergency-step">
+                            <div class="step-number">6</div>
+                            <h4>Monitor Closely</h4>
+                            <p>Watch for symptoms and be prepared to transport your cat to the vet immediately.</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 15px;">
+                        <h3>☎ Emergency Contacts</h3>
+                        <p><strong>PAWS Animal Welfare Society:</strong> (+60)17 284 7500</p>
+                        <p><strong>Malaysian National Animal Welfare Foundation:</strong> (+60)19 211 2150</p>
+                        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">*These hotlines may charge a consultation fee but provide 24/7 expert guidance</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Purrfect Cat Guide. Made with 💜 for cat lovers everywhere.</p>
+        </div>
+    </footer>
+
+    <div class="floating-cat" onclick="scrollToTop()">🐾</div>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 128, 128, 0.95)';
+            } else {
+                header.style.background = 'rgba(0, 128, 128, 0.9)';
+            }
+        });
+
+        // Mobile menu functionality
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'rgba(0, 128, 128, 0.95)';
+                navLinks.style.padding = '1rem';
+            }
+        });
+
+       // Add animation trigger on scroll window.addEventListener('scroll', function() { const cards = document.querySelectorAll('.danger-card, .emergency-step'); cards.forEach(card => { const cardTop = card.getBoundingClientRect().top; const windowHeight = window.innerHeight; if (cardTop < windowHeight * 0.8) { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; } }); }); // Add click effect to danger cards document.querySelectorAll('.danger-card').forEach(card => { card.addEventListener('click', function() { this.style.transform = 'scale(1.02)'; setTimeout(() => { this.style.transform = 'translateY(-10px)'; }, 150); }); }); // Add hover sound effect simulation (visual feedback) document.querySelectorAll('.danger-card, .emergency-step').forEach(element => { element.addEventListener('mouseenter', function() { this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'; }); }); // Floating cat interaction let catClicks = 0; document.querySelector('.floating-cat').addEventListener('click', function() { catClicks++; if (catClicks % 5 === 0) { this.innerHTML = '😸'; setTimeout(() => { this.innerHTML = '🐾'; }, 1000); } // Create temporary paw prints on click for (let i = 0; i < 3; i++) { setTimeout(() => { createTempPawPrint(); }, i * 200); } }); function createTempPawPrint() { const paw = document.createElement('div'); paw.innerHTML = '🐾'; paw.style.position = 'fixed'; paw.style.fontSize = '1.5rem'; paw.style.color = 'rgba(197, 48, 48, 0.6)'; paw.style.pointerEvents = 'none'; paw.style.zIndex = '999'; paw.style.right = Math.random() * 100 + 100 + 'px'; paw.style.bottom = Math.random() * 100 + 100 + 'px'; paw.style.animation = 'fadeOut 2s ease-out forwards'; document.body.appendChild(paw); setTimeout(() => { paw.remove(); }, 2000); } // Add CSS for fadeOut animation const style = document.createElement('style'); style.textContent = ` @keyframes fadeOut { 0% { opacity: 1; transform: scale(1) rotate(0deg); } 100% { opacity: 0; transform: scale(0.5) rotate(180deg) translateY(-50px); } } `; document.head.appendChild(style); // Emergency contact click tracking document.querySelectorAll('.emergency-section p').forEach(p => { if (p.innerHTML.includes('888') || p.innerHTML.includes('855')) { p.style.cursor = 'pointer'; p.addEventListener('click', function() { this.style.background = 'rgba(255,255,255,0.2)'; this.style.borderRadius = '10px'; this.style.padding = '0.5rem'; setTimeout(() => { this.style.background = 'transparent'; this.style.padding = '0'; }, 1000); }); } }); // Add warning pulse effect to extreme danger items setInterval(() => { document.querySelectorAll('.danger-level.extreme').forEach(level => { level.style.animation = 'pulse 0.5s ease-in-out'; setTimeout(() => { level.style.animation = ''; }, 500); }); }, 5000); // Add CSS for pulse animation const pulseStyle = document.createElement('style'); pulseStyle.textContent = ` @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(197, 48, 48, 0.5); } } `; document.head.appendChild(pulseStyle); // Intersection Observer for better performance on scroll animations const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 }; const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; entry.target.classList.add('animated'); } }); }, observerOptions); // Observe all cards for animation document.querySelectorAll('.danger-card, .emergency-step').forEach(card => { observer.observe(card); }); // Add keyboard accessibility document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { // Close mobile menu if open const navLinks = document.querySelector('.nav-links'); if (navLinks.style.display === 'flex') { navLinks.style.display = 'none'; } } if (e.key === ' ' || e.key === 'Enter') { // Scroll to top with spacebar or enter when focused on floating cat if (document.activeElement.classList.contains('floating-cat')) { e.preventDefault(); scrollToTop(); } } }); // Make floating cat focusable for accessibility document.querySelector('.floating-cat').setAttribute('tabindex', '0'); document.querySelector('.floating-cat').setAttribute('aria-label', 'Scroll to top'); // Add focus styles const focusStyle = document.createElement('style'); focusStyle.textContent = ` .floating-cat:focus { outline: 3px solid rgba(197, 48, 48, 0.6); outline-offset: 5px; border-radius: 50%; } .danger-card:focus-within { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(197, 48, 48, 0.3); outline: 2px solid rgba(197, 48, 48, 0.5); outline-offset: 5px; } `; document.head.appendChild(focusStyle); console.log('🐱 Purrfect Cat Guide - Foods to Avoid page loaded successfully!'); console.log('⚠️ Remember: This information is for educational purposes. Always consult with a veterinarian for medical advice.');
+       // Add animation trigger on scroll window.addEventListener('scroll', function() { const cards = document.querySelectorAll('.danger-card, .emergency-step'); cards.forEach(card => { const cardTop = card.getBoundingClientRect().top; const windowHeight = window.innerHeight; if (cardTop < windowHeight * 0.8) { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; } }); }); // Add click effect to danger cards document.querySelectorAll('.danger-card').forEach(card => { card.addEventListener('click', function() { this.style.transform = 'scale(1.02)'; setTimeout(() => { this.style.transform = 'translateY(-10px)'; }, 150); }); }); // Add hover sound effect simulation (visual feedback) document.querySelectorAll('.danger-card, .emergency-step').forEach(element => { element.addEventListener('mouseenter', function() { this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'; }); }); // Floating cat interaction let catClicks = 0; document.querySelector('.floating-cat').addEventListener('click', function() { catClicks++; if (catClicks % 5 === 0) { this.innerHTML = '😸'; setTimeout(() => { this.innerHTML = '🐾'; }, 1000); } // Create temporary paw prints on click for (let i = 0; i < 3; i++) { setTimeout(() => { createTempPawPrint(); }, i * 200); } }); function createTempPawPrint() { const paw = document.createElement('div'); paw.innerHTML = '🐾'; paw.style.position = 'fixed'; paw.style.fontSize = '1.5rem'; paw.style.color = 'rgba(197, 48, 48, 0.6)'; paw.style.pointerEvents = 'none'; paw.style.zIndex = '999'; paw.style.right = Math.random() * 100 + 100 + 'px'; paw.style.bottom = Math.random() * 100 + 100 + 'px'; paw.style.animation = 'fadeOut 2s ease-out forwards'; document.body.appendChild(paw); setTimeout(() => { paw.remove(); }, 2000); } // Add CSS for fadeOut animation const style = document.createElement('style'); style.textContent = ` @keyframes fadeOut { 0% { opacity: 1; transform: scale(1) rotate(0deg); } 100% { opacity: 0; transform: scale(0.5) rotate(180deg) translateY(-50px); } } `; document.head.appendChild(style); // Emergency contact click tracking document.querySelectorAll('.emergency-section p').forEach(p => { if (p.innerHTML.includes('888') || p.innerHTML.includes('855')) { p.style.cursor = 'pointer'; p.addEventListener('click', function() { this.style.background = 'rgba(255,255,255,0.2)'; this.style.borderRadius = '10px'; this.style.padding = '0.5rem'; setTimeout(() => { this.style.background = 'transparent'; this.style.padding = '0'; }, 1000); }); } }); // Add warning pulse effect to extreme danger items setInterval(() => { document.querySelectorAll('.danger-level.extreme').forEach(level => { level.style.animation = 'pulse 0.5s ease-in-out'; setTimeout(() => { level.style.animation = ''; }, 500); }); }, 5000); // Add CSS for pulse animation const pulseStyle = document.createElement('style'); pulseStyle.textContent = ` @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(197, 48, 48, 0.5); } } `; document.head.appendChild(pulseStyle); // Intersection Observer for better performance on scroll animations const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 }; const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; entry.target.classList.add('animated'); } }); }, observerOptions); // Observe all cards for animation document.querySelectorAll('.danger-card, .emergency-step').forEach(card => { observer.observe(card); }); // Add keyboard accessibility document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { // Close mobile menu if open const navLinks = document.querySelector('.nav-links'); if (navLinks.style.display === 'flex') { navLinks.style.display = 'none'; } } if (e.key === ' ' || e.key === 'Enter') { // Scroll to top with spacebar or enter when focused on floating cat if (document.activeElement.classList.contains('floating-cat')) { e.preventDefault(); scrollToTop(); } } }); // Make floating cat focusable for accessibility document.querySelector('.floating-cat').setAttribute('tabindex', '0'); document.querySelector('.floating-cat').setAttribute('aria-label', 'Scroll to top'); // Add focus styles const focusStyle = document.createElement('style'); focusStyle.textContent = ` .floating-cat:focus { outline: 3px solid rgba(197, 48, 48, 0.6); outline-offset: 5px; border-radius: 50%; } .danger-card:focus-within { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(197, 48, 48, 0.3); outline: 2px solid rgba(197, 48, 48, 0.5); outline-offset: 5px; } `; document.head.appendChild(focusStyle); console.log('🐱 Purrfect Cat Guide - Foods to Avoid page loaded successfully!'); console.log('⚠️ Remember: This information is for educational purposes. Always consult with a veterinarian for medical advice.');
+       // Add animation trigger on scroll window.addEventListener('scroll', function() { const cards = document.querySelectorAll('.danger-card, .emergency-step'); cards.forEach(card => { const cardTop = card.getBoundingClientRect().top; const windowHeight = window.innerHeight; if (cardTop < windowHeight * 0.8) { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; } }); }); // Add click effect to danger cards document.querySelectorAll('.danger-card').forEach(card => { card.addEventListener('click', function() { this.style.transform = 'scale(1.02)'; setTimeout(() => { this.style.transform = 'translateY(-10px)'; }, 150); }); }); // Add hover sound effect simulation (visual feedback) document.querySelectorAll('.danger-card, .emergency-step').forEach(element => { element.addEventListener('mouseenter', function() { this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'; }); }); // Floating cat interaction let catClicks = 0; document.querySelector('.floating-cat').addEventListener('click', function() { catClicks++; if (catClicks % 5 === 0) { this.innerHTML = '😸'; setTimeout(() => { this.innerHTML = '🐾'; }, 1000); } // Create temporary paw prints on click for (let i = 0; i < 3; i++) { setTimeout(() => { createTempPawPrint(); }, i * 200); } }); function createTempPawPrint() { const paw = document.createElement('div'); paw.innerHTML = '🐾'; paw.style.position = 'fixed'; paw.style.fontSize = '1.5rem'; paw.style.color = 'rgba(197, 48, 48, 0.6)'; paw.style.pointerEvents = 'none'; paw.style.zIndex = '999'; paw.style.right = Math.random() * 100 + 100 + 'px'; paw.style.bottom = Math.random() * 100 + 100 + 'px'; paw.style.animation = 'fadeOut 2s ease-out forwards'; document.body.appendChild(paw); setTimeout(() => { paw.remove(); }, 2000); } // Add CSS for fadeOut animation const style = document.createElement('style'); style.textContent = ` @keyframes fadeOut { 0% { opacity: 1; transform: scale(1) rotate(0deg); } 100% { opacity: 0; transform: scale(0.5) rotate(180deg) translateY(-50px); } } `; document.head.appendChild(style); // Emergency contact click tracking document.querySelectorAll('.emergency-section p').forEach(p => { if (p.innerHTML.includes('888') || p.innerHTML.includes('855')) { p.style.cursor = 'pointer'; p.addEventListener('click', function() { this.style.background = 'rgba(255,255,255,0.2)'; this.style.borderRadius = '10px'; this.style.padding = '0.5rem'; setTimeout(() => { this.style.background = 'transparent'; this.style.padding = '0'; }, 1000); }); } }); // Add warning pulse effect to extreme danger items setInterval(() => { document.querySelectorAll('.danger-level.extreme').forEach(level => { level.style.animation = 'pulse 0.5s ease-in-out'; setTimeout(() => { level.style.animation = ''; }, 500); }); }, 5000); // Add CSS for pulse animation const pulseStyle = document.createElement('style'); pulseStyle.textContent = ` @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(197, 48, 48, 0.5); } } `; document.head.appendChild(pulseStyle); // Intersection Observer for better performance on scroll animations const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 }; const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; entry.target.classList.add('animated'); } }); }, observerOptions); // Observe all cards for animation document.querySelectorAll('.danger-card, .emergency-step').forEach(card => { observer.observe(card); }); // Add keyboard accessibility document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { // Close mobile menu if open const navLinks = document.querySelector('.nav-links'); if (navLinks.style.display === 'flex') { navLinks.style.display = 'none'; } } if (e.key === ' ' || e.key === 'Enter') { // Scroll to top with spacebar or enter when focused on floating cat if (document.activeElement.classList.contains('floating-cat')) { e.preventDefault(); scrollToTop(); } } }); // Make floating cat focusable for accessibility document.querySelector('.floating-cat').setAttribute('tabindex', '0'); document.querySelector('.floating-cat').setAttribute('aria-label', 'Scroll to top'); // Add focus styles const focusStyle = document.createElement('style'); focusStyle.textContent = ` .floating-cat:focus { outline: 3px solid rgba(197, 48, 48, 0.6); outline-offset: 5px; border-radius: 50%; } .danger-card:focus-within { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(197, 48, 48, 0.3); outline: 2px solid rgba(197, 48, 48, 0.5); outline-offset: 5px; } `; document.head.appendChild(focusStyle); console.log('🐱 Purrfect Cat Guide - Foods to Avoid page loaded successfully!'); console.log('⚠️ Remember: This information is for educational purposes. Always consult with a veterinarian for medical advice.');, .emergency-step');
+       // Add animation trigger on scroll window.addEventListener('scroll', function() { const cards = document.querySelectorAll('.danger-card, .emergency-step'); cards.forEach(card => { const cardTop = card.getBoundingClientRect().top; const windowHeight = window.innerHeight; if (cardTop < windowHeight * 0.8) { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; } }); }); // Add click effect to danger cards document.querySelectorAll('.danger-card').forEach(card => { card.addEventListener('click', function() { this.style.transform = 'scale(1.02)'; setTimeout(() => { this.style.transform = 'translateY(-10px)'; }, 150); }); }); // Add hover sound effect simulation (visual feedback) document.querySelectorAll('.danger-card, .emergency-step').forEach(element => { element.addEventListener('mouseenter', function() { this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'; }); }); // Floating cat interaction let catClicks = 0; document.querySelector('.floating-cat').addEventListener('click', function() { catClicks++; if (catClicks % 5 === 0) { this.innerHTML = '😸'; setTimeout(() => { this.innerHTML = '🐾'; }, 1000); } // Create temporary paw prints on click for (let i = 0; i < 3; i++) { setTimeout(() => { createTempPawPrint(); }, i * 200); } }); function createTempPawPrint() { const paw = document.createElement('div'); paw.innerHTML = '🐾'; paw.style.position = 'fixed'; paw.style.fontSize = '1.5rem'; paw.style.color = 'rgba(197, 48, 48, 0.6)'; paw.style.pointerEvents = 'none'; paw.style.zIndex = '999'; paw.style.right = Math.random() * 100 + 100 + 'px'; paw.style.bottom = Math.random() * 100 + 100 + 'px'; paw.style.animation = 'fadeOut 2s ease-out forwards'; document.body.appendChild(paw); setTimeout(() => { paw.remove(); }, 2000); } // Add CSS for fadeOut animation const style = document.createElement('style'); style.textContent = ` @keyframes fadeOut { 0% { opacity: 1; transform: scale(1) rotate(0deg); } 100% { opacity: 0; transform: scale(0.5) rotate(180deg) translateY(-50px); } } `; document.head.appendChild(style); // Emergency contact click tracking document.querySelectorAll('.emergency-section p').forEach(p => { if (p.innerHTML.includes('888') || p.innerHTML.includes('855')) { p.style.cursor = 'pointer'; p.addEventListener('click', function() { this.style.background = 'rgba(255,255,255,0.2)'; this.style.borderRadius = '10px'; this.style.padding = '0.5rem'; setTimeout(() => { this.style.background = 'transparent'; this.style.padding = '0'; }, 1000); }); } }); // Add warning pulse effect to extreme danger items setInterval(() => { document.querySelectorAll('.danger-level.extreme').forEach(level => { level.style.animation = 'pulse 0.5s ease-in-out'; setTimeout(() => { level.style.animation = ''; }, 500); }); }, 5000); // Add CSS for pulse animation const pulseStyle = document.createElement('style'); pulseStyle.textContent = ` @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(197, 48, 48, 0.5); } } `; document.head.appendChild(pulseStyle); // Intersection Observer for better performance on scroll animations const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 }; const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; entry.target.classList.add('animated'); } }); }, observerOptions); // Observe all cards for animation document.querySelectorAll('.danger-card, .emergency-step').forEach(card => { observer.observe(card); }); // Add keyboard accessibility document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { // Close mobile menu if open const navLinks = document.querySelector('.nav-links'); if (navLinks.style.display === 'flex') { navLinks.style.display = 'none'; } } if (e.key === ' ' || e.key === 'Enter') { // Scroll to top with spacebar or enter when focused on floating cat if (document.activeElement.classList.contains('floating-cat')) { e.preventDefault(); scrollToTop(); } } }); // Make floating cat focusable for accessibility document.querySelector('.floating-cat').setAttribute('tabindex', '0'); document.querySelector('.floating-cat').setAttribute('aria-label', 'Scroll to top'); // Add focus styles const focusStyle = document.createElement('style'); focusStyle.textContent = ` .floating-cat:focus { outline: 3px solid rgba(197, 48, 48, 0.6); outline-offset: 5px; border-radius: 50%; } .danger-card:focus-within { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(197, 48, 48, 0.3); outline: 2px solid rgba(197, 48, 48, 0.5); outline-offset: 5px; } `; document.head.appendChild(focusStyle); console.log('🐱 Purrfect Cat Guide - Foods to Avoid page loaded successfully!'); console.log('⚠️ Remember: This information is for educational purposes. Always consult with a veterinarian for medical advice.');
+       // Add animation trigger on scroll window.addEventListener('scroll', function() { const cards = document.querySelectorAll('.danger-card, .emergency-step'); cards.forEach(card => { const cardTop = card.getBoundingClientRect().top; const windowHeight = window.innerHeight; if (cardTop < windowHeight * 0.8) { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; } }); }); // Add click effect to danger cards document.querySelectorAll('.danger-card').forEach(card => { card.addEventListener('click', function() { this.style.transform = 'scale(1.02)'; setTimeout(() => { this.style.transform = 'translateY(-10px)'; }, 150); }); }); // Add hover sound effect simulation (visual feedback) document.querySelectorAll('.danger-card, .emergency-step').forEach(element => { element.addEventListener('mouseenter', function() { this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'; }); }); // Floating cat interaction let catClicks = 0; document.querySelector('.floating-cat').addEventListener('click', function() { catClicks++; if (catClicks % 5 === 0) { this.innerHTML = '😸'; setTimeout(() => { this.innerHTML = '🐾'; }, 1000); } // Create temporary paw prints on click for (let i = 0; i < 3; i++) { setTimeout(() => { createTempPawPrint(); }, i * 200); } }); function createTempPawPrint() { const paw = document.createElement('div'); paw.innerHTML = '🐾'; paw.style.position = 'fixed'; paw.style.fontSize = '1.5rem'; paw.style.color = 'rgba(197, 48, 48, 0.6)'; paw.style.pointerEvents = 'none'; paw.style.zIndex = '999'; paw.style.right = Math.random() * 100 + 100 + 'px'; paw.style.bottom = Math.random() * 100 + 100 + 'px'; paw.style.animation = 'fadeOut 2s ease-out forwards'; document.body.appendChild(paw); setTimeout(() => { paw.remove(); }, 2000); } // Add CSS for fadeOut animation const style = document.createElement('style'); style.textContent = ` @keyframes fadeOut { 0% { opacity: 1; transform: scale(1) rotate(0deg); } 100% { opacity: 0; transform: scale(0.5) rotate(180deg) translateY(-50px); } } `; document.head.appendChild(style); // Emergency contact click tracking document.querySelectorAll('.emergency-section p').forEach(p => { if (p.innerHTML.includes('888') || p.innerHTML.includes('855')) { p.style.cursor = 'pointer'; p.addEventListener('click', function() { this.style.background = 'rgba(255,255,255,0.2)'; this.style.borderRadius = '10px'; this.style.padding = '0.5rem'; setTimeout(() => { this.style.background = 'transparent'; this.style.padding = '0'; }, 1000); }); } }); // Add warning pulse effect to extreme danger items setInterval(() => { document.querySelectorAll('.danger-level.extreme').forEach(level => { level.style.animation = 'pulse 0.5s ease-in-out'; setTimeout(() => { level.style.animation = ''; }, 500); }); }, 5000); // Add CSS for pulse animation const pulseStyle = document.createElement('style'); pulseStyle.textContent = ` @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(197, 48, 48, 0.5); } } `; document.head.appendChild(pulseStyle); // Intersection Observer for better performance on scroll animations const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 }; const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; entry.target.classList.add('animated'); } }); }, observerOptions); // Observe all cards for animation document.querySelectorAll('.danger-card, .emergency-step').forEach(card => { observer.observe(card); }); // Add keyboard accessibility document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { // Close mobile menu if open const navLinks = document.querySelector('.nav-links'); if (navLinks.style.display === 'flex') { navLinks.style.display = 'none'; } } if (e.key === ' ' || e.key === 'Enter') { // Scroll to top with spacebar or enter when focused on floating cat if (document.activeElement.classList.contains('floating-cat')) { e.preventDefault(); scrollToTop(); } } }); // Make floating cat focusable for accessibility document.querySelector('.floating-cat').setAttribute('tabindex', '0'); document.querySelector('.floating-cat').setAttribute('aria-label', 'Scroll to top'); // Add focus styles const focusStyle = document.createElement('style'); focusStyle.textContent = ` .floating-cat:focus { outline: 3px solid rgba(197, 48, 48, 0.6); outline-offset: 5px; border-radius: 50%; } .danger-card:focus-within { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(197, 48, 48, 0.3); outline: 2px solid rgba(197, 48, 48, 0.5); outline-offset: 5px; } `; document.head.appendChild(focusStyle); console.log('🐱 Purrfect Cat Guide - Foods to Avoid page loaded successfully!'); console.log('⚠️ Remember: This information is for educational purposes. Always consult with a veterinarian for medical advice.');
+       // Add animation trigger on scroll window.addEventListener('scroll', function() { const cards = document.querySelectorAll('.danger-card, .emergency-step'); cards.forEach(card => { const cardTop = card.getBoundingClientRect().top; const windowHeight = window.innerHeight; if (cardTop < windowHeight * 0.8) { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; } }); }); // Add click effect to danger cards document.querySelectorAll('.danger-card').forEach(card => { card.addEventListener('click', function() { this.style.transform = 'scale(1.02)'; setTimeout(() => { this.style.transform = 'translateY(-10px)'; }, 150); }); }); // Add hover sound effect simulation (visual feedback) document.querySelectorAll('.danger-card, .emergency-step').forEach(element => { element.addEventListener('mouseenter', function() { this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'; }); }); // Floating cat interaction let catClicks = 0; document.querySelector('.floating-cat').addEventListener('click', function() { catClicks++; if (catClicks % 5 === 0) { this.innerHTML = '😸'; setTimeout(() => { this.innerHTML = '🐾'; }, 1000); } // Create temporary paw prints on click for (let i = 0; i < 3; i++) { setTimeout(() => { createTempPawPrint(); }, i * 200); } }); function createTempPawPrint() { const paw = document.createElement('div'); paw.innerHTML = '🐾'; paw.style.position = 'fixed'; paw.style.fontSize = '1.5rem'; paw.style.color = 'rgba(197, 48, 48, 0.6)'; paw.style.pointerEvents = 'none'; paw.style.zIndex = '999'; paw.style.right = Math.random() * 100 + 100 + 'px'; paw.style.bottom = Math.random() * 100 + 100 + 'px'; paw.style.animation = 'fadeOut 2s ease-out forwards'; document.body.appendChild(paw); setTimeout(() => { paw.remove(); }, 2000); } // Add CSS for fadeOut animation const style = document.createElement('style'); style.textContent = ` @keyframes fadeOut { 0% { opacity: 1; transform: scale(1) rotate(0deg); } 100% { opacity: 0; transform: scale(0.5) rotate(180deg) translateY(-50px); } } `; document.head.appendChild(style); // Emergency contact click tracking document.querySelectorAll('.emergency-section p').forEach(p => { if (p.innerHTML.includes('888') || p.innerHTML.includes('855')) { p.style.cursor = 'pointer'; p.addEventListener('click', function() { this.style.background = 'rgba(255,255,255,0.2)'; this.style.borderRadius = '10px'; this.style.padding = '0.5rem'; setTimeout(() => { this.style.background = 'transparent'; this.style.padding = '0'; }, 1000); }); } }); // Add warning pulse effect to extreme danger items setInterval(() => { document.querySelectorAll('.danger-level.extreme').forEach(level => { level.style.animation = 'pulse 0.5s ease-in-out'; setTimeout(() => { level.style.animation = ''; }, 500); }); }, 5000); // Add CSS for pulse animation const pulseStyle = document.createElement('style'); pulseStyle.textContent = ` @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(197, 48, 48, 0.5); } } `; document.head.appendChild(pulseStyle); // Intersection Observer for better performance on scroll animations const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 }; const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; entry.target.classList.add('animated'); } }); }, observerOptions); // Observe all cards for animation document.querySelectorAll('.danger-card, .emergency-step').forEach(card => { observer.observe(card); }); // Add keyboard accessibility document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { // Close mobile menu if open const navLinks = document.querySelector('.nav-links'); if (navLinks.style.display === 'flex') { navLinks.style.display = 'none'; } } if (e.key === ' ' || e.key === 'Enter') { // Scroll to top with spacebar or enter when focused on floating cat if (document.activeElement.classList.contains('floating-cat')) { e.preventDefault(); scrollToTop(); } } }); // Make floating cat focusable for accessibility document.querySelector('.floating-cat').setAttribute('tabindex', '0'); document.querySelector('.floating-cat').setAttribute('aria-label', 'Scroll to top'); // Add focus styles const focusStyle = document.createElement('style'); focusStyle.textContent = ` .floating-cat:focus { outline: 3px solid rgba(197, 48, 48, 0.6); outline-offset: 5px; border-radius: 50%; } .danger-card:focus-within { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(197, 48, 48, 0.3); outline: 2px solid rgba(197, 48, 48, 0.5); outline-offset: 5px; } `; document.head.appendChild(focusStyle); console.log('🐱 Purrfect Cat Guide - Foods to Avoid page loaded successfully!'); console.log('⚠️ Remember: This information is for educational purposes. Always consult with a veterinarian for medical advice.');
+       // Add animation trigger on scroll window.addEventListener('scroll', function() { const cards = document.querySelectorAll('.danger-card, .emergency-step'); cards.forEach(card => { const cardTop = card.getBoundingClientRect().top; const windowHeight = window.innerHeight; if (cardTop < windowHeight * 0.8) { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; } }); }); // Add click effect to danger cards document.querySelectorAll('.danger-card').forEach(card => { card.addEventListener('click', function() { this.style.transform = 'scale(1.02)'; setTimeout(() => { this.style.transform = 'translateY(-10px)'; }, 150); }); }); // Add hover sound effect simulation (visual feedback) document.querySelectorAll('.danger-card, .emergency-step').forEach(element => { element.addEventListener('mouseenter', function() { this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'; }); }); // Floating cat interaction let catClicks = 0; document.querySelector('.floating-cat').addEventListener('click', function() { catClicks++; if (catClicks % 5 === 0) { this.innerHTML = '😸'; setTimeout(() => { this.innerHTML = '🐾'; }, 1000); } // Create temporary paw prints on click for (let i = 0; i < 3; i++) { setTimeout(() => { createTempPawPrint(); }, i * 200); } }); function createTempPawPrint() { const paw = document.createElement('div'); paw.innerHTML = '🐾'; paw.style.position = 'fixed'; paw.style.fontSize = '1.5rem'; paw.style.color = 'rgba(197, 48, 48, 0.6)'; paw.style.pointerEvents = 'none'; paw.style.zIndex = '999'; paw.style.right = Math.random() * 100 + 100 + 'px'; paw.style.bottom = Math.random() * 100 + 100 + 'px'; paw.style.animation = 'fadeOut 2s ease-out forwards'; document.body.appendChild(paw); setTimeout(() => { paw.remove(); }, 2000); } // Add CSS for fadeOut animation const style = document.createElement('style'); style.textContent = ` @keyframes fadeOut { 0% { opacity: 1; transform: scale(1) rotate(0deg); } 100% { opacity: 0; transform: scale(0.5) rotate(180deg) translateY(-50px); } } `; document.head.appendChild(style); // Emergency contact click tracking document.querySelectorAll('.emergency-section p').forEach(p => { if (p.innerHTML.includes('888') || p.innerHTML.includes('855')) { p.style.cursor = 'pointer'; p.addEventListener('click', function() { this.style.background = 'rgba(255,255,255,0.2)'; this.style.borderRadius = '10px'; this.style.padding = '0.5rem'; setTimeout(() => { this.style.background = 'transparent'; this.style.padding = '0'; }, 1000); }); } }); // Add warning pulse effect to extreme danger items setInterval(() => { document.querySelectorAll('.danger-level.extreme').forEach(level => { level.style.animation = 'pulse 0.5s ease-in-out'; setTimeout(() => { level.style.animation = ''; }, 500); }); }, 5000); // Add CSS for pulse animation const pulseStyle = document.createElement('style'); pulseStyle.textContent = ` @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(197, 48, 48, 0.5); } } `; document.head.appendChild(pulseStyle); // Intersection Observer for better performance on scroll animations const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 }; const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; entry.target.classList.add('animated'); } }); }, observerOptions); // Observe all cards for animation document.querySelectorAll('.danger-card, .emergency-step').forEach(card => { observer.observe(card); }); // Add keyboard accessibility document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { // Close mobile menu if open const navLinks = document.querySelector('.nav-links'); if (navLinks.style.display === 'flex') { navLinks.style.display = 'none'; } } if (e.key === ' ' || e.key === 'Enter') { // Scroll to top with spacebar or enter when focused on floating cat if (document.activeElement.classList.contains('floating-cat')) { e.preventDefault(); scrollToTop(); } } }); // Make floating cat focusable for accessibility document.querySelector('.floating-cat').setAttribute('tabindex', '0'); document.querySelector('.floating-cat').setAttribute('aria-label', 'Scroll to top'); // Add focus styles const focusStyle = document.createElement('style'); focusStyle.textContent = ` .floating-cat:focus { outline: 3px solid rgba(197, 48, 48, 0.6); outline-offset: 5px; border-radius: 50%; } .danger-card:focus-within { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(197, 48, 48, 0.3); outline: 2px solid rgba(197, 48, 48, 0.5); outline-offset: 5px; } `; document.head.appendChild(focusStyle); console.log('🐱 Purrfect Cat Guide - Foods to Avoid page loaded successfully!'); console.log('⚠️ Remember: This information is for educational purposes. Always consult with a veterinarian for medical advice.');
+       // Add animation trigger on scroll window.addEventListener('scroll', function() { const cards = document.querySelectorAll('.danger-card, .emergency-step'); cards.forEach(card => { const cardTop = card.getBoundingClientRect().top; const windowHeight = window.innerHeight; if (cardTop < windowHeight * 0.8) { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; } }); }); // Add click effect to danger cards document.querySelectorAll('.danger-card').forEach(card => { card.addEventListener('click', function() { this.style.transform = 'scale(1.02)'; setTimeout(() => { this.style.transform = 'translateY(-10px)'; }, 150); }); }); // Add hover sound effect simulation (visual feedback) document.querySelectorAll('.danger-card, .emergency-step').forEach(element => { element.addEventListener('mouseenter', function() { this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'; }); }); // Floating cat interaction let catClicks = 0; document.querySelector('.floating-cat').addEventListener('click', function() { catClicks++; if (catClicks % 5 === 0) { this.innerHTML = '😸'; setTimeout(() => { this.innerHTML = '🐾'; }, 1000); } // Create temporary paw prints on click for (let i = 0; i < 3; i++) { setTimeout(() => { createTempPawPrint(); }, i * 200); } }); function createTempPawPrint() { const paw = document.createElement('div'); paw.innerHTML = '🐾'; paw.style.position = 'fixed'; paw.style.fontSize = '1.5rem'; paw.style.color = 'rgba(197, 48, 48, 0.6)'; paw.style.pointerEvents = 'none'; paw.style.zIndex = '999'; paw.style.right = Math.random() * 100 + 100 + 'px'; paw.style.bottom = Math.random() * 100 + 100 + 'px'; paw.style.animation = 'fadeOut 2s ease-out forwards'; document.body.appendChild(paw); setTimeout(() => { paw.remove(); }, 2000); } // Add CSS for fadeOut animation const style = document.createElement('style'); style.textContent = ` @keyframes fadeOut { 0% { opacity: 1; transform: scale(1) rotate(0deg); } 100% { opacity: 0; transform: scale(0.5) rotate(180deg) translateY(-50px); } } `; document.head.appendChild(style); // Emergency contact click tracking document.querySelectorAll('.emergency-section p').forEach(p => { if (p.innerHTML.includes('888') || p.innerHTML.includes('855')) { p.style.cursor = 'pointer'; p.addEventListener('click', function() { this.style.background = 'rgba(255,255,255,0.2)'; this.style.borderRadius = '10px'; this.style.padding = '0.5rem'; setTimeout(() => { this.style.background = 'transparent'; this.style.padding = '0'; }, 1000); }); } }); // Add warning pulse effect to extreme danger items setInterval(() => { document.querySelectorAll('.danger-level.extreme').forEach(level => { level.style.animation = 'pulse 0.5s ease-in-out'; setTimeout(() => { level.style.animation = ''; }, 500); }); }, 5000); // Add CSS for pulse animation const pulseStyle = document.createElement('style'); pulseStyle.textContent = ` @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(197, 48, 48, 0.5); } } `; document.head.appendChild(pulseStyle); // Intersection Observer for better performance on scroll animations const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 }; const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; entry.target.classList.add('animated'); } }); }, observerOptions); // Observe all cards for animation document.querySelectorAll('.danger-card, .emergency-step').forEach(card => { observer.observe(card); }); // Add keyboard accessibility document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { // Close mobile menu if open const navLinks = document.querySelector('.nav-links'); if (navLinks.style.display === 'flex') { navLinks.style.display = 'none'; } } if (e.key === ' ' || e.key === 'Enter') { // Scroll to top with spacebar or enter when focused on floating cat if (document.activeElement.classList.contains('floating-cat')) { e.preventDefault(); scrollToTop(); } } }); // Make floating cat focusable for accessibility document.querySelector('.floating-cat').setAttribute('tabindex', '0'); document.querySelector('.floating-cat').setAttribute('aria-label', 'Scroll to top'); // Add focus styles const focusStyle = document.createElement('style'); focusStyle.textContent = ` .floating-cat:focus { outline: 3px solid rgba(197, 48, 48, 0.6); outline-offset: 5px; border-radius: 50%; } .danger-card:focus-within { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(197, 48, 48, 0.3); outline: 2px solid rgba(197, 48, 48, 0.5); outline-offset: 5px; } `; document.head.appendChild(focusStyle); console.log('🐱 Purrfect Cat Guide - Foods to Avoid page loaded successfully!'); console.log('⚠️ Remember: This information is for educational purposes. Always consult with a veterinarian for medical advice.');
+       // Add animation trigger on scroll window.addEventListener('scroll', function() { const cards = document.querySelectorAll('.danger-card, .emergency-step'); cards.forEach(card => { const cardTop = card.getBoundingClientRect().top; const windowHeight = window.innerHeight; if (cardTop < windowHeight * 0.8) { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; } }); }); // Add click effect to danger cards document.querySelectorAll('.danger-card').forEach(card => { card.addEventListener('click', function() { this.style.transform = 'scale(1.02)'; setTimeout(() => { this.style.transform = 'translateY(-10px)'; }, 150); }); }); // Add hover sound effect simulation (visual feedback) document.querySelectorAll('.danger-card, .emergency-step').forEach(element => { element.addEventListener('mouseenter', function() { this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'; }); }); // Floating cat interaction let catClicks = 0; document.querySelector('.floating-cat').addEventListener('click', function() { catClicks++; if (catClicks % 5 === 0) { this.innerHTML = '😸'; setTimeout(() => { this.innerHTML = '🐾'; }, 1000); } // Create temporary paw prints on click for (let i = 0; i < 3; i++) { setTimeout(() => { createTempPawPrint(); }, i * 200); } }); function createTempPawPrint() { const paw = document.createElement('div'); paw.innerHTML = '🐾'; paw.style.position = 'fixed'; paw.style.fontSize = '1.5rem'; paw.style.color = 'rgba(197, 48, 48, 0.6)'; paw.style.pointerEvents = 'none'; paw.style.zIndex = '999'; paw.style.right = Math.random() * 100 + 100 + 'px'; paw.style.bottom = Math.random() * 100 + 100 + 'px'; paw.style.animation = 'fadeOut 2s ease-out forwards'; document.body.appendChild(paw); setTimeout(() => { paw.remove(); }, 2000); } // Add CSS for fadeOut animation const style = document.createElement('style'); style.textContent = ` @keyframes fadeOut { 0% { opacity: 1; transform: scale(1) rotate(0deg); } 100% { opacity: 0; transform: scale(0.5) rotate(180deg) translateY(-50px); } } `; document.head.appendChild(style); // Emergency contact click tracking document.querySelectorAll('.emergency-section p').forEach(p => { if (p.innerHTML.includes('888') || p.innerHTML.includes('855')) { p.style.cursor = 'pointer'; p.addEventListener('click', function() { this.style.background = 'rgba(255,255,255,0.2)'; this.style.borderRadius = '10px'; this.style.padding = '0.5rem'; setTimeout(() => { this.style.background = 'transparent'; this.style.padding = '0'; }, 1000); }); } }); // Add warning pulse effect to extreme danger items setInterval(() => { document.querySelectorAll('.danger-level.extreme').forEach(level => { level.style.animation = 'pulse 0.5s ease-in-out'; setTimeout(() => { level.style.animation = ''; }, 500); }); }, 5000); // Add CSS for pulse animation const pulseStyle = document.createElement('style'); pulseStyle.textContent = ` @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(197, 48, 48, 0.5); } } `; document.head.appendChild(pulseStyle); // Intersection Observer for better performance on scroll animations const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 }; const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; entry.target.classList.add('animated'); } }); }, observerOptions); // Observe all cards for animation document.querySelectorAll('.danger-card, .emergency-step').forEach(card => { observer.observe(card); }); // Add keyboard accessibility document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { // Close mobile menu if open const navLinks = document.querySelector('.nav-links'); if (navLinks.style.display === 'flex') { navLinks.style.display = 'none'; } } if (e.key === ' ' || e.key === 'Enter') { // Scroll to top with spacebar or enter when focused on floating cat if (document.activeElement.classList.contains('floating-cat')) { e.preventDefault(); scrollToTop(); } } }); // Make floating cat focusable for accessibility document.querySelector('.floating-cat').setAttribute('tabindex', '0'); document.querySelector('.floating-cat').setAttribute('aria-label', 'Scroll to top'); // Add focus styles const focusStyle = document.createElement('style'); focusStyle.textContent = ` .floating-cat:focus { outline: 3px solid rgba(197, 48, 48, 0.6); outline-offset: 5px; border-radius: 50%; } .danger-card:focus-within { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(197, 48, 48, 0.3); outline: 2px solid rgba(197, 48, 48, 0.5); outline-offset: 5px; } `; document.head.appendChild(focusStyle); console.log('🐱 Purrfect Cat Guide - Foods to Avoid page loaded successfully!'); console.log('⚠️ Remember: This information is for educational purposes. Always consult with a veterinarian for medical advice.');
+       // Add animation trigger on scroll window.addEventListener('scroll', function() { const cards = document.querySelectorAll('.danger-card, .emergency-step'); cards.forEach(card => { const cardTop = card.getBoundingClientRect().top; const windowHeight = window.innerHeight; if (cardTop < windowHeight * 0.8) { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; } }); }); // Add click effect to danger cards document.querySelectorAll('.danger-card').forEach(card => { card.addEventListener('click', function() { this.style.transform = 'scale(1.02)'; setTimeout(() => { this.style.transform = 'translateY(-10px)'; }, 150); }); }); // Add hover sound effect simulation (visual feedback) document.querySelectorAll('.danger-card, .emergency-step').forEach(element => { element.addEventListener('mouseenter', function() { this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'; }); }); // Floating cat interaction let catClicks = 0; document.querySelector('.floating-cat').addEventListener('click', function() { catClicks++; if (catClicks % 5 === 0) { this.innerHTML = '😸'; setTimeout(() => { this.innerHTML = '🐾'; }, 1000); } // Create temporary paw prints on click for (let i = 0; i < 3; i++) { setTimeout(() => { createTempPawPrint(); }, i * 200); } }); function createTempPawPrint() { const paw = document.createElement('div'); paw.innerHTML = '🐾'; paw.style.position = 'fixed'; paw.style.fontSize = '1.5rem'; paw.style.color = 'rgba(197, 48, 48, 0.6)'; paw.style.pointerEvents = 'none'; paw.style.zIndex = '999'; paw.style.right = Math.random() * 100 + 100 + 'px'; paw.style.bottom = Math.random() * 100 + 100 + 'px'; paw.style.animation = 'fadeOut 2s ease-out forwards'; document.body.appendChild(paw); setTimeout(() => { paw.remove(); }, 2000); } // Add CSS for fadeOut animation const style = document.createElement('style'); style.textContent = ` @keyframes fadeOut { 0% { opacity: 1; transform: scale(1) rotate(0deg); } 100% { opacity: 0; transform: scale(0.5) rotate(180deg) translateY(-50px); } } `; document.head.appendChild(style); // Emergency contact click tracking document.querySelectorAll('.emergency-section p').forEach(p => { if (p.innerHTML.includes('888') || p.innerHTML.includes('855')) { p.style.cursor = 'pointer'; p.addEventListener('click', function() { this.style.background = 'rgba(255,255,255,0.2)'; this.style.borderRadius = '10px'; this.style.padding = '0.5rem'; setTimeout(() => { this.style.background = 'transparent'; this.style.padding = '0'; }, 1000); }); } }); // Add warning pulse effect to extreme danger items setInterval(() => { document.querySelectorAll('.danger-level.extreme').forEach(level => { level.style.animation = 'pulse 0.5s ease-in-out'; setTimeout(() => { level.style.animation = ''; }, 500); }); }, 5000); // Add CSS for pulse animation const pulseStyle = document.createElement('style'); pulseStyle.textContent = ` @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(197, 48, 48, 0.5); } } `; document.head.appendChild(pulseStyle); // Intersection Observer for better performance on scroll animations const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 }; const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; entry.target.classList.add('animated'); } }); }, observerOptions); // Observe all cards for animation document.querySelectorAll('.danger-card, .emergency-step').forEach(card => { observer.observe(card); }); // Add keyboard accessibility document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { // Close mobile menu if open const navLinks = document.querySelector('.nav-links'); if (navLinks.style.display === 'flex') { navLinks.style.display = 'none'; } } if (e.key === ' ' || e.key === 'Enter') { // Scroll to top with spacebar or enter when focused on floating cat if (document.activeElement.classList.contains('floating-cat')) { e.preventDefault(); scrollToTop(); } } }); // Make floating cat focusable for accessibility document.querySelector('.floating-cat').setAttribute('tabindex', '0'); document.querySelector('.floating-cat').setAttribute('aria-label', 'Scroll to top'); // Add focus styles const focusStyle = document.createElement('style'); focusStyle.textContent = ` .floating-cat:focus { outline: 3px solid rgba(197, 48, 48, 0.6); outline-offset: 5px; border-radius: 50%; } .danger-card:focus-within { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(197, 48, 48, 0.3); outline: 2px solid rgba(197, 48, 48, 0.5); outline-offset: 5px; } `; document.head.appendChild(focusStyle); console.log('🐱 Purrfect Cat Guide - Foods to Avoid page loaded successfully!'); console.log('⚠️ Remember: This information is for educational purposes. Always consult with a veterinarian for medical advice.');

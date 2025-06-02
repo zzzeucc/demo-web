@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Nutrition Guide - Purrfect Cat Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #F0E3E0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(0, 128, 128, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 128, 128, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .hero-nutrition {
+            padding: 140px 0 80px;
+            text-align: center;
+            color: #333;
+            position: relative;
+            background: linear-gradient(135deg, #F0E3E0 0%, #E8D5D1 100%);
+        }
+
+        .hero-nutrition h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-nutrition p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .nutrition-content {
+            background: white;
+            padding: 5rem 0;
+        }
+
+        .nutrition-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        
+        }
+
+        .nutrition-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 128, 128, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: popIn 0.8s ease forwards;
+        }
+
+        .nutrition-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 128, 128, 0.2);
+            border-color: rgba(0, 128, 128, 0.3);
+        }
+
+        .nutrition-card:nth-child(2) { animation-delay: 0.2s; }
+        .nutrition-card:nth-child(3) { animation-delay: 0.4s; }
+        .nutrition-card:nth-child(4) { animation-delay: 0.6s; }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .nutrition-card h3 {
+            font-size: 1.8rem;
+            color: #008080;
+            margin-bottom: 1rem;
+        }
+
+        .nutrition-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .nutrition-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .nutrition-list li {
+            padding: 0.5rem 0;
+            color: #555;
+            border-bottom: 1px solid #f0f0f0;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .nutrition-list li:before {
+            content: "🐾";
+            position: absolute;
+            left: 0;
+            color: #008080;
+        }
+
+        .nutrition-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feeding-schedule {
+            background: linear-gradient(135deg, #7FC6A4 0%, #006666 100%);
+            color: white;
+            padding: 5rem 0;
+            margin-top: 3rem;
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .schedule-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        .schedule-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .schedule-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .schedule-card .age {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+        }
+
+        .schedule-card .frequency {
+            font-size: 1.2rem;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .warning-section {
+            background: #fff3cd;
+            border: 2px solid #ffeaa7;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .warning-section h3 {
+            color: #856404;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .warning-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .warning-list li {
+            padding: 0.5rem 0;
+            color: #856404;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .warning-list li:before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease 0.1s forwards;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: white;
+            color: #333;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .floating-cat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 3rem;
+            z-index: 1000;
+            animation: float 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        /* PAW PRINT ANIMATIONS */
+        .paw-prints {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .paw-print {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(0, 128, 128, 0.1);
+            animation: pawFloat 15s linear infinite;
+            opacity: 0;
+        }
+
+        .paw-print:nth-child(odd) {
+            color: rgba(0, 128, 128, 0.08);
+            font-size: 1.2rem;
+        }
+
+        .paw-print:nth-child(2) { animation-delay: -2s; left: 10%; }
+        .paw-print:nth-child(3) { animation-delay: -4s; left: 20%; font-size: 1.8rem; }
+        .paw-print:nth-child(4) { animation-delay: -6s; left: 30%; }
+        .paw-print:nth-child(5) { animation-delay: -8s; left: 40%; font-size: 1.3rem; }
+        .paw-print:nth-child(6) { animation-delay: -10s; left: 50%; }
+        .paw-print:nth-child(7) { animation-delay: -12s; left: 60%; font-size: 1.6rem; }
+        .paw-print:nth-child(8) { animation-delay: -14s; left: 70%; }
+        .paw-print:nth-child(9) { animation-delay: -16s; left: 80%; font-size: 1.4rem; }
+        .paw-print:nth-child(10) { animation-delay: -18s; left: 90%; }
+
+        .hero-paws {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .hero-paw {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(0, 128, 128, 0.15);
+            animation: heroPawBounce 8s ease-in-out infinite;
+        }
+
+        .hero-paw:nth-child(1) {
+            top: 20%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .hero-paw:nth-child(2) {
+            top: 60%;
+            right: 20%;
+            animation-delay: 2s;
+        }
+
+        .hero-paw:nth-child(3) {
+            bottom: 30%;
+            left: 25%;
+            animation-delay: 4s;
+        }
+
+        .hero-paw:nth-child(4) {
+            top: 40%;
+            right: 15%;
+            animation-delay: 6s;
+        }
+
+        .card-paw-trail {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.2rem;
+            color: rgba(0, 128, 128, 0.2);
+            animation: trailPulse 3s ease-in-out infinite;
+        }
+
+        .schedule-paw {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.3);
+            animation: trailPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.8);
+            }
+            50% {
+                transform: translateY(-10px) scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pawFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes heroPawBounce {
+            0%, 100% {
+                transform: translateY(0px) scale(1);
+                opacity: 0.15;
+            }
+            50% {
+                transform: translateY(-20px) scale(1.1);
+                opacity: 0.25;
+            }
+        }
+
+        @keyframes trailPulse {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(1.1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero-nutrition h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-nutrition p {
+                font-size: 1.1rem;
+            }
+            
+            .nutrition-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .schedule-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Paw Print Background Animation -->
+    <div class="paw-prints">
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+        <div class="paw-print">🐾</div>
+    </div>
+
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🐱 Purrfect Guide</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="breeds.html">Top Breeds</a></li>
+                <li><a href="avoid.html">Foods to Avoid</a></li>
+                <li><a href="nutrition.html" class="active">Nutrition</a></li>
+                <li><a href="care.html">Cat Care</a></li>
+            </ul>
+            <button class="mobile-menu">☰</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-nutrition">
+            <!-- Hero Section Paw Animations -->
+            <div class="hero-paws">
+                <div class="hero-paw">🐾</div>
+                <div class="hero-paw">🐾</div>
+                <div class="hero-paw">🐾</div>
+                <div class="hero-paw">🐾</div>
+            </div>
+            <div class="container">
+                <h1>🍽️ Cat Nutrition Guide</h1>
+                <p>Discover the essential nutrients, feeding schedules, and dietary requirements to keep your feline friend healthy, happy, and thriving throughout their life.</p>
+            </div>
+        </section>
+
+        <section class="nutrition-content">
+            <div class="container">
+                <h2 class="section-title">Essential Nutrients for Cats</h2>
+                <p class="section-subtitle">Understanding what your cat needs for optimal health and vitality</p>
+                
+                <div class="nutrition-grid">
+                    <div class="nutrition-card">
+                        <div class="card-paw-trail">🐾</div>
+                        <div class="card-icon">🥩</div>
+                        <h3>High-Quality Protein</h3>
+                        <p>Cats are obligate carnivores and require high-quality animal protein for muscle development and maintenance.</p>
+                        <ul class="nutrition-list">
+                            <li>Chicken, turkey, fish, and beef</li>
+                            <li>Essential amino acids like taurine</li>
+                            <li>At least 26% protein in dry food</li>
+                            <li>Higher protein needs for kittens and seniors</li>
+                        </ul>
+                    </div>
+
+                    <div class="nutrition-card">
+                        <div class="card-paw-trail">🐾</div>
+                        <div class="card-icon">🥑</div>
+                        <h3>Healthy Fats</h3>
+                        <p>Essential fatty acids support skin health, coat shine, and overall cellular function.</p>
+                        <ul class="nutrition-list">
+                            <li>Omega-3 and Omega-6 fatty acids</li>
+                            <li>Fish oil and chicken fat</li>
+                            <li>9% minimum fat content</li>
+                            <li>Important for vitamin absorption</li>
+                        </ul>
+                    </div>
+
+                    <div class="nutrition-card">
+                        <div class="card-paw-trail">🐾</div>
+                        <div class="card-icon">💧</div>
+                        <h3>Proper Hydration</h3>
+                        <p>Cats have a low thirst drive and need adequate moisture in their diet to prevent health issues.</p>
+                        <ul class="nutrition-list">
+                            <li>Fresh water available 24/7</li>
+                            <li>Wet food provides extra moisture</li>
+                            <li>Consider water fountains</li>
+                            <li>Monitor for signs of dehydration</li>
+                        </ul>
+                    </div>
+
+                    <div class="nutrition-card">
+                        <div class="card-paw-trail">🐾</div>
+                        <div class="card-icon">💊</div>
+                        <h3>Vitamins & Minerals</h3>
+                        <p>Essential micronutrients support immune function, bone health, and metabolic processes.</p>
+                        <ul class="nutrition-list">
+                            <li>Vitamin A for vision and immunity</li>
+                            <li>B-vitamins for energy metabolism</li>
+                            <li>Calcium and phosphorus for bones</li>
+                            <li>Taurine for heart and eye health</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="warning-section">
+                    <h3>⚠️ Foods to Avoid</h3>
+                    <p>These foods can be toxic or harmful to cats and should never be given:</p>
+                    <ul class="warning-list">
+                        <li>Chocolate, coffee, and caffeine</li>
+                        <li>Onions, garlic, and chives</li>
+                        <li>Grapes and raisins</li>
+                        <li>Alcohol and raw dough</li>
+                        <li>Raw eggs and raw fish</li>
+                        <li>Xylitol (artificial sweetener)</li>
+                        <li>Lily plants (extremely toxic)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="feeding-schedule">
+            <div class="container">
+                <h2 class="section-title" style="color: white;">Feeding Schedule Guidelines</h2>
+                <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">Age-appropriate feeding recommendations for optimal health</p>
+                
+                <div class="schedule-grid">
+                    <div class="schedule-card">
+                        <div class="schedule-paw">🐾</div>
+                        <h4>🐱 Kittens</h4>
+                        <div class="age">2-12 months</div>
+                        <div class="frequency">3-4 times daily</div>
+                        <p style="margin-top: 1rem; color: rgba(255,255,255,0.8);">High-calorie kitten food with frequent small meals for proper growth and development.</p>
+                    </div>
+
+                    <div class="schedule-card">
+                        <div class="schedule-paw">🐾</div>
+                        <h4>🐈 Adult Cats</h4>
+                        <div class="age">1-7 years</div>
+                        <div class="frequency">2 times daily</div>
+                        <p style="margin-top: 1rem; color: rgba(255,255,255,0.8);">Consistent meal times with portion control to maintain healthy weight.</p>
+                    </div>
+
+                    <div class="schedule-card">
+                        <div class="schedule-paw">🐾</div>
+                        <h4>👴🏻 Senior Cats</h4>
+                        <div class="age">7+ years</div>
+                        <div class="frequency">2-3 times daily</div>
+                        <p style="margin-top: 1rem; color: rgba(255,255,255,0.8);">Easily digestible senior formula with smaller, more frequent meals.</p>
+                    </div>
+
+                    <div class="schedule-card">
+                        <div class="schedule-paw">🐾</div>
+                        <h4>🤰 Pregnant/Nursing</h4>
+                        <div class="age">Special needs</div>
+                        <div class="frequency">Free feeding</div>
+                        <p style="margin-top: 1rem; color: rgba(255,255,255,0.8);">High-calorie kitten food available at all times during pregnancy and nursing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Purrfect Cat Guide. Made with 💜 for cat lovers everywhere.</p>
+        </div>
+    </footer>
+
+    <div class="floating-cat" onclick="scrollToTop()">🐾</div>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 128, 128, 0.95)';
+            } else {
+                header.style.background = 'rgba(0, 128, 128, 0.9)';
+            }
+        });
+
+        // Mobile menu functionality
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'rgba(0, 128, 128, 0.95)';
+                navLinks.style.padding = '1rem';
+            }
+        });
+
+        // Add animation trigger on scroll
+        window.addEventListener('scroll', function() {
+            const cards = document.querySelectorAll('.nutrition-card, .schedule-card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (cardTop < windowHeight * 0.8) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
