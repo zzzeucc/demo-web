@@ -492,30 +492,220 @@
             }
         }
 
-             @media (max-width: 768px) {
-     .nav-links {
-         display: none;
-     }
-     
-     .mobile-menu {
-         display: block;
-     }
-     
-     .hero h1 {
-         font-size: 2.5rem;
-     }
-     
-     .hero p {
-         font-size: 1.1rem;
-     }
-     
-     .features-grid {
-         grid-template-columns: 1fr;
-         gap: 1rem;
-     }
- }
+        /* MOBILE OPTIMIZATIONS */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
 
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0, 128, 128, 0.98);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 0.5rem;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
 
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero-danger {
+                padding: 120px 0 60px;
+            }
+
+            .hero-danger h1 {
+                font-size: 2.2rem;
+                line-height: 1.2;
+            }
+
+            .hero-danger p {
+                font-size: 1.1rem;
+                padding: 0 10px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section-subtitle {
+                font-size: 1.1rem;
+                padding: 0 10px;
+            }
+
+            /* Single column layout for danger cards */
+            .danger-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin-top: 2rem;
+            }
+
+            .danger-card {
+                padding: 1.5rem;
+            }
+
+            .danger-card h3 {
+                font-size: 1.4rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.3rem;
+            }
+
+            .card-icon {
+                font-size: 2.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .symptoms-list li {
+                font-size: 0.85rem;
+                padding-left: 1.8rem;
+            }
+
+            .symptoms-list li:before {
+                font-size: 0.7rem;
+            }
+
+            .danger-content {
+                padding: 3rem 0;
+            }
+
+            .emergency-section {
+                padding: 3rem 0;
+            }
+
+            .emergency-section h2 {
+                font-size: 2rem;
+            }
+
+            .emergency-section p {
+                font-size: 1.1rem;
+            }
+
+            .emergency-steps {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin-top: 2rem;
+            }
+
+            .emergency-step {
+                padding: 1.5rem;
+            }
+
+            .step-number {
+                font-size: 1.5rem;
+            }
+
+            .safe-alternatives {
+                padding: 1.5rem;
+                margin: 2rem 0;
+            }
+
+            .safe-alternatives h3 {
+                font-size: 1.3rem;
+            }
+
+            .safe-list {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .safe-list li {
+                padding: 0.3rem 0;
+                padding-left: 1.8rem;
+            }
+
+            .floating-cat {
+                font-size: 2.5rem;
+                bottom: 15px;
+                right: 15px;
+            }
+
+            /* Reduce paw animations on mobile for performance */
+            .paw-prints {
+                display: none;
+            }
+
+            .hero-paws .hero-paw {
+                font-size: 1.5rem;
+            }
+
+            .card-paw-trail {
+                font-size: 1rem;
+                top: 10px;
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .hero-danger {
+                padding: 110px 0 50px;
+            }
+
+            .hero-danger h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-danger p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+            }
+
+            .danger-card {
+                padding: 1.2rem;
+            }
+
+            .danger-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .card-icon {
+                font-size: 2rem;
+            }
+
+            .emergency-section h2 {
+                font-size: 1.7rem;
+            }
+
+            .emergency-section p {
+                font-size: 1rem;
+            }
+
+            .emergency-step {
+                padding: 1.2rem;
+            }
+
+            .safe-alternatives {
+                padding: 1.2rem;
+            }
+
+            .floating-cat {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -539,10 +729,9 @@
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="breeds.html">Top Breeds</a></li>
-                  <li><a href="foods-to-avoid.html" class="active">Foods to Avoid</a></li>
+                <li><a href="foods-to-avoid.html" class="active">Foods to Avoid</a></li>
                 <li><a href="nutrition.html">Nutrition</a></li>
                 <li><a href="care.html">Cat Care</a></li>
-                
             </ul>
             <button class="mobile-menu">☰</button>
         </nav>
@@ -714,6 +903,7 @@
                 <div class="emergency-content">
                     <h2>🚨 Emergency Response</h2>
                     <p>If your cat has consumed any toxic food, follow these immediate steps:</p>
+                
                     
                     <div class="emergency-steps">
                         <div class="emergency-step">
