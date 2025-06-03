@@ -461,6 +461,15 @@
             .feature-paw-trail {
                 color: rgba(255, 255, 255, 0.15);
             }
+            
+            /* CSS class to completely stop animations */
+            .stop-paw-animations .paw-print,
+            .stop-paw-animations .hero-paw,
+            .stop-paw-animations .feature-paw-trail {
+                animation: none !important;
+                opacity: 0 !important;
+                display: none !important;
+            }
         }
     </style>
 </head>
