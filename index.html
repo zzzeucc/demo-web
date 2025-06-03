@@ -444,59 +444,43 @@
                 gap: 1rem;
             }
             
-            /* Make paw print animations extremely transparent on mobile */
+            /* Make paw print animations moderately visible on mobile */
             .paw-print {
-                color: rgba(0, 128, 128, 0.001);
-                opacity: 0.001;
+                color: rgba(0, 128, 128, 0.06);
             }
             
             .paw-print:nth-child(odd) {
-                color: rgba(0, 128, 128, 0.0008);
-                opacity: 0.0008;
+                color: rgba(0, 128, 128, 0.05);
             }
             
             .hero-paw {
-                color: rgba(0, 128, 128, 0.002);
-                opacity: 0.002;
+                color: rgba(0, 128, 128, 0.1);
             }
             
-            /* Also make the feature card paw trails more transparent on mobile */
+            /* Feature card paw trails moderately visible on mobile */
             .feature-paw-trail {
-                color: rgba(255, 255, 255, 0.01);
-                opacity: 0.01;
+                color: rgba(255, 255, 255, 0.2);
             }
             
-            /* Extra transparency for iOS devices */
+            /* Slightly less visible for iOS devices */
             @supports (-webkit-touch-callout: none) {
                 .paw-print {
-                    color: rgba(0, 128, 128, 0.0005);
-                    opacity: 0.0005;
+                    color: rgba(0, 128, 128, 0.04);
                 }
                 
                 .paw-print:nth-child(odd) {
-                    color: rgba(0, 128, 128, 0.0003);
-                    opacity: 0.0003;
+                    color: rgba(0, 128, 128, 0.035);
                 }
                 
                 .hero-paw {
-                    color: rgba(0, 128, 128, 0.001);
-                    opacity: 0.001;
+                    color: rgba(0, 128, 128, 0.08);
                 }
                 
                 .feature-paw-trail {
-                    color: rgba(255, 255, 255, 0.005);
-                    opacity: 0.005;
+                    color: rgba(255, 255, 255, 0.15);
                 }
             }
             
-            /* CSS class to completely stop animations */
-            .stop-paw-animations .paw-print,
-            .stop-paw-animations .hero-paw,
-            .stop-paw-animations .feature-paw-trail {
-                animation: none !important;
-                opacity: 0 !important;
-                display: none !important;
-            }
         }
     </style>
 </head>
